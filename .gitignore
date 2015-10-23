@@ -54,5 +54,22 @@ ios/RCTMapboxGL/MGLShape.h
 ios/RCTMapboxGL/Mapbox.bundle/
 ios/RCTMapboxGL/Mapbox.h
 ios/RCTMapboxGL/libMapbox.a
-./android/build/
-reactnativemapboxgl.iml
+
+# Android
+
+# Gradle files
+android/.gradle/
+
+# IntelliJ files
+android/.idea/
+android/*.iml
+
+# Build files
+android/build/
+android/*.apk
+
+# Local settings
+android/local.properties
+
+# Capture files
+android/captures/
