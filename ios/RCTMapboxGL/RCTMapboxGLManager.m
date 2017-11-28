@@ -434,13 +434,15 @@ RCT_REMAP_METHOD(removeOfflinePack,
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 100 * NSEC_PER_MSEC), dispatch_get_main_queue(), ^{
             [_removedPacks removeObject:tempPack];
-            [[MGLOfflineStorage sharedOfflineStorage] removePack:tempPack withCompletionHandler:^(NSError * _Nullable error) {
-                if (error != nil) {
-                    reject(@"remove_pack_failed", error.localizedFailureReason, error);
-                } else {
-                    resolve(@{ @"deleted": userInfo[@"name"] });
-                }
-            }];
+            if(tempPack.state != MGLOfflinePackStateInvalid) {
+                [[MGLOfflineStorage sharedOfflineStorage] removePack:tempPack withCompletionHandler:^(NSError * _Nullable error) {
+                    if (error != nil) {
+                        reject(@"remove_pack_failed", error.localizedFailureReason, error);
+                    } else {
+                        resolve(@{ @"deleted": userInfo[@"name"] });
+                    }
+                }];
+            }
         });
     });
 }
